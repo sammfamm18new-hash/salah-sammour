@@ -1,98 +1,131 @@
-* {
-  box-sizing: border-box;
+/* ---------- base ---------- */
+:root{
+  --bg-1: #071228;
+  --bg-2: #0f2a3f;
+  --glass: rgba(255,255,255,0.06);
+  --glass-2: rgba(255,255,255,0.08);
+  --accent: linear-gradient(90deg,#22c55e,#4ade80);
+  --muted: rgba(255,255,255,0.75);
+  --glass-border: rgba(255,255,255,0.12);
 }
 
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: "Inter", system-ui, sans-serif;
-  background: radial-gradient(circle at top left, #1b2735, #090a0f);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(34,197,94,0.03), transparent 10%),
+              linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color: #fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:16px;
 }
 
-.glass-card {
-  width: 340px;
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow:
-    0 0 40px rgba(0, 255, 255, 0.15),
-    inset 0 0 20px rgba(255, 255, 255, 0.05);
+/* App container */
+.app{
+  width:100%;
+  max-width:520px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin: 8px auto 32px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 5px;
+/* header */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px;
+  border-radius:16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(18px) saturate(120%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
 }
 
-.date {
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 20px;
+.title-wrap{ text-align:center; flex:1 }
+.title-wrap h1{ margin:0; font-size:20px; letter-spacing:0.2px }
+.date{ margin:4px 0 0; font-size:13px; color:var(--muted) }
+
+/* Buttons */
+.btn {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border:1px solid var(--glass-border);
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:600;
+  font-size:14px;
+}
+.btn.ghost{ background:transparent; opacity:0.9 }
+.btn.small{ padding:6px 10px; font-size:13px }
+.icon-btn{ background:transparent; border: none; font-size:18px; padding:6px }
+
+/* Cards */
+.card{
+  border-radius:18px;
+  padding:14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(120%);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.5);
 }
 
-.prayer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px;
-  border-radius: 14px;
-  margin-bottom: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+/* prayers list */
+.prayers{ display:flex; flex-direction:column; gap:12px; margin-bottom:12px }
+
+.prayer{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px; border-radius:14px; font-size:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.06);
+  transition: transform .12s ease, background .18s ease;
+}
+.prayer:active{ transform:scale(.985) }
+.prayer.completed{
+  background: linear-gradient(90deg, rgba(34,197,94,0.12), rgba(16,185,129,0.06));
+  border-color: rgba(34,197,94,0.18);
 }
 
-.prayer:hover {
-  background: rgba(255, 255, 255, 0.15);
+/* progress */
+.progress-section{ margin-top:6px }
+.progress-container{ width:100%; height:12px; background: rgba(255,255,255,0.04); border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,0.03) }
+#progress-bar{ height:100%; width:0%; background:var(--accent); transition: width .45s cubic-bezier(.2,.9,.2,1); }
+
+.progress-text{ text-align:center; margin-top:8px; font-size:13px; color:var(--muted) }
+
+/* stats card */
+.stats-top{ display:flex; justify-content:space-between; gap:16px; align-items:center; margin-bottom:12px }
+.muted{ font-size:12px; color:var(--muted) }
+
+.actions-row{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap }
+.cloud-row{ display:flex; gap:8px; align-items:center; margin-bottom:10px }
+
+.stats-list{ display:grid; gap:6px; margin-top:8px; font-size:13px; color:var(--muted) }
+
+/* footer */
+.footer-note{ text-align:center; font-size:12px; color:rgba(255,255,255,0.55); margin-top:6px }
+
+/* small screens adjustments */
+@media (max-width:420px){
+  .app{ padding: 6px }
+  .title-wrap h1{ font-size:18px }
+  .prayer{ padding:14px; font-size:17px }
 }
 
-.prayer span {
-  font-size: 17px;
-}
-
-input[type="checkbox"] {
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  position: relative;
-}
-
-input[type="checkbox"]:checked {
-  background: linear-gradient(135deg, #00f5ff, #00ffa6);
-  border: none;
-  box-shadow: 0 0 12px rgba(0, 255, 200, 0.8);
-}
-
-.progress-container {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-#progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00f5ff, #00ffa6);
-  border-radius: 20px;
-  transition: width 0.4s ease;
-}
-
-#progress-text {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 14px;
-  opacity: 0.9;
+/* Light mode support */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg-1: #eaf3f6;
+    --bg-2: #dbeef6;
+    --glass-border: rgba(3,7,18,0.06);
+    --muted: rgba(5,10,20,0.55);
+  }
+  body{ color:#071228 }
 }
