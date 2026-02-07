@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at top left, #1b2735, #090a0f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.glass-card {
+  width: 340px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 0 40px rgba(0, 255, 255, 0.15),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.date {
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.prayer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.prayer:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.prayer span {
+  font-size: 17px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #00f5ff, #00ffa6);
+  border: none;
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.8);
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f5ff, #00ffa6);
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+#progress-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.9;
+}
