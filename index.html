@@ -1,26 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
   <title>Salah Tracker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#071228" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Icons: add your icons at /icons/... -->
+  <link rel="icon" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase (optional cloud sync) - load if you plan to use cloud sync -->
+  <!--
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  -->
 </head>
 <body>
+  <main class="app" id="app">
+    <!-- Top bar -->
+    <header class="app-header">
+      <div class="header-left">
+        <button id="theme-toggle" class="icon-btn" aria-label="toggle theme">🌓</button>
+      </div>
 
-  <div class="glass-card">
-    <h1>🕌 Salah Tracker</h1>
-    <p id="date" class="date"></p>
+      <div class="title-wrap">
+        <h1>🕌 Salah Tracker</h1>
+        <p id="date" class="date"></p>
+      </div>
 
-    <div id="prayers" class="prayers"></div>
+      <div class="header-right">
+        <button id="install-btn" class="install-btn">Install</button>
+      </div>
+    </header>
 
-    <div class="progress-container">
-      <div id="progress-bar"></div>
-    </div>
+    <!-- Content -->
+    <section class="card prayers-card">
+      <div class="prayers" id="prayers"></div>
 
-    <p id="progress-text"></p>
-  </div>
+      <div class="progress-section">
+        <div class="progress-container" aria-hidden="true">
+          <div id="progress-bar"></div>
+        </div>
+        <p id="progress-text" class="progress-text"></p>
+      </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- Stats + actions -->
+    <section class="card stats-card">
+      <div class="stats-top">
+        <div>
+          <strong id="streak">Streak: 0</strong>
+          <div class="muted">Daily hot streak</div>
+        </div>
+
+        <div>
+          <strong id="missed-count">Missed: 0</strong>
+          <div class="muted">This week</div>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <button id="notify-btn" class="btn">Enable Notifications</button>
+        <button id="export-btn" class="btn ghost">Export</button>
+        <button id="import-btn" class="btn ghost">Import</button>
+      </div>
+
+      <div class="cloud-row">
+        <div class="muted">Cloud:</div>
+        <button id="sign-in-btn" class="btn small">Sign in</button>
+        <button id="sync-now-btn" class="btn small ghost">Sync</button>
+      </div>
+
+      <div class="stats-list" id="stats-list" aria-live="polite"></div>
+    </section>
+
+    <footer class="footer-note">
+      <small>Tiny note: notifications scheduled here work while the app is open. For reliable background alerts use FCM/server push.</small>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
+  <script>
+    // register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW reg failed', err));
+    }
+  </script>
 </body>
 </html>
